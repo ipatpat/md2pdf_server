@@ -2,7 +2,7 @@ import requests
 import os
 
 # 配置 API 地址
-API_URL = 'http://164.92.79.101:8003/convert'
+API_URL = 'http://127.0.0.1:8003/convert'
 # 下载目录
 DOWNLOAD_DIR = 'downloads'
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
