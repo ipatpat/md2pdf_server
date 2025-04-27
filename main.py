@@ -42,7 +42,6 @@ def convert():
             outputfile=pdf_temp_path,
             extra_args=[
                 '--pdf-engine=xelatex',
-                '-V' 
                 '-V', 'mainfont="Noto Serif"',
                 '-V', 'sansfont="Noto Sans"',
                 '-V', 'CJKmainfont="Noto Sans CJK SC"'
