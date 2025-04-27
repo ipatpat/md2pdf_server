@@ -42,7 +42,7 @@ def convert():
             outputfile=pdf_temp_path,
             extra_args=[
                 '--pdf-engine=xelatex',
-                '-V', 'mainfont="WenQuanYi Micro Hei"'
+                '-V', 'CJKmainfont="Noto Serif CJK SC"'
             ]
         )
         final_path = os.path.join(PDF_DIR, safe_name)
