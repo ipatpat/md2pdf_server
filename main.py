@@ -2,6 +2,8 @@ from flask import Flask, request, send_from_directory, jsonify
 import tempfile
 import os
 import pypandoc
+import shutil
+
 
 app = Flask(__name__)
 
@@ -29,12 +31,10 @@ def convert():
         md_file.write(md_content.encode('utf-8'))
         md_path = md_file.name
 
-    # 创建临时 PDF 文件路径
+    # 生成临时 PDF 文件并移动至目标目录
     pdf_fd, pdf_temp_path = tempfile.mkstemp(suffix='.pdf')
     os.close(pdf_fd)
-
     try:
-        # 使用 pypandoc.convert_file 在 Python 中调用 Pandoc
         pypandoc.convert_file(
             md_path,
             'pdf',
@@ -42,27 +42,20 @@ def convert():
             outputfile=pdf_temp_path,
             extra_args=[
                 '--pdf-engine=xelatex',
-                '-V', 'mainfont=WenQuanYi Micro Hei'
+                '-V', 'mainfont="WenQuanYi Micro Hei"'
             ]
         )
-
+        final_path = os.path.join(PDF_DIR, safe_name)
+        shutil.move(pdf_temp_path, final_path)
     except Exception as e:
-        # 转换出错，清理临时文件后返回错误
-        error_msg = repr(e) if isinstance(e, tuple) else str(e)
+        error_msg = str(e)
         print(f"转换错误: {error_msg}")
-        try:
-            os.remove(md_path)
-        except OSError:
-            pass
-        try:
-            os.remove(pdf_temp_path)
-        except OSError:
-            pass
+        # 清理临时文件
+        try: os.remove(md_path)
+        except OSError: pass
+        try: os.remove(pdf_temp_path)
+        except OSError: pass
         return jsonify(error=f"Conversion failed: {error_msg}"), 500
-
-    # 将生成的文件移动到存储目录，并使用用户指定的文件名
-    final_path = os.path.join(PDF_DIR, safe_name)
-    os.replace(pdf_temp_path, final_path)
 
     # 清理 Markdown 临时文件
     try:
