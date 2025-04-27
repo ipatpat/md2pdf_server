@@ -43,8 +43,10 @@ def convert():
             extra_args=[
                 '--pdf-engine=xelatex',
                 '-V' 
-                #,'CJKmainfont="Noto Sans CJK SC"'
-            ]
+                '-V', 'mainfont="Noto Serif"',
+                '-V', 'sansfont="Noto Sans"',
+                '-V', 'CJKmainfont="Noto Sans CJK SC"'
+    ]
         )
         final_path = os.path.join(PDF_DIR, safe_name)
         shutil.move(pdf_temp_path, final_path)

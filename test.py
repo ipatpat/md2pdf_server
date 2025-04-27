@@ -9,7 +9,7 @@ os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
 # 测试用的 Markdown 内容和文件名
 payload = {
-    'markdown': '# title\nshit',
+    'markdown': '# title\n吃屎吧',
     'file_name': 'test_output.pdf'
 }
 
