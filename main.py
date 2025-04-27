@@ -74,4 +74,4 @@ def serve_pdf(filename):
     return send_from_directory(PDF_DIR, filename, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8002, debug=True, use_reloader=False)
+    app.run(host='0.0.0.0', port=8003, debug=True, use_reloader=False)
