@@ -42,7 +42,7 @@ def convert():
             outputfile=pdf_temp_path,
             extra_args=[
                 '--pdf-engine=xelatex',
-                '-V', 'mainfont=WenQuanYi Micro Hei"'
+                '-V', 'mainfont=WenQuanYi Micro Hei'
             ]
         )
 
