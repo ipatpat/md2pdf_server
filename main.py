@@ -4,8 +4,7 @@ import tempfile
 import os
 import pypandoc
 import shutil
-from weasyprint import HTML, CSS # 导入 WeasyPrint
-from weasyprint.fonts import FontConfiguration # 导入字体配置
+from weasyprint import HTML, CSS, FontConfiguration # 导入 WeasyPrint
 
 
 app = Flask(__name__)
