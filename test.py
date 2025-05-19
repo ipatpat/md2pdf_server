@@ -3,6 +3,7 @@ import os
 
 # 配置 API 地址
 API_URL = 'https://aibuild.ipatpat.com/convert'
+
 # 下载目录
 DOWNLOAD_DIR = 'downloads'
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
@@ -15,7 +16,7 @@ payload = {
 
 try:
     # 发起 POST 请求
-    resp = requests.post(API_URL, json=payload, verify=False)
+    resp = requests.post(API_URL, json=payload, verify=True)
     print(resp.status_code, resp.text)   
     resp.raise_for_status()
 
@@ -37,7 +38,7 @@ print(f"转换成功，下载链接: {download_url}")
 download = True  # 如需手动检查可设为 False
 if download:
     try:
-        r = requests.get(download_url, verify=False)
+        r = requests.get(download_url, verify=True)
         r.raise_for_status()
         save_path = os.path.join(DOWNLOAD_DIR, file_name)
         with open(save_path, 'wb') as f:

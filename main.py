@@ -48,7 +48,7 @@ def convert():
         return jsonify(error=f"Conversion failed: {error_msg}"), 500
 
     # 返回下载链接
-    download_url = f"{request.url_root}pdfs/{safe_name}"
+    download_url = f"https://aibuild.ipatpat.com/pdfs/{safe_name}"
     return jsonify(url=download_url, file_name=safe_name)
 
 @app.route('/pdfs/<path:filename>', methods=['GET'])
