@@ -4,6 +4,7 @@ import os
 os.environ['DYLD_LIBRARY_PATH'] = '/opt/homebrew/lib:/opt/homebrew/opt/glib/lib' + ':' + os.environ.get('DYLD_LIBRARY_PATH', '')
 from md2pdf.core import md2pdf
 import shutil
+from main import app
 
 
 app = Flask(__name__)
@@ -56,6 +57,10 @@ def serve_pdf(filename):
     # 提供 PDF 下载
     return send_from_directory(PDF_DIR, filename, as_attachment=True)
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify(status="ok")
+
 if __name__ == '__main__':
     # HTTPS 运行配置，使用证书绑定域名 aibuild.ipatpat.com
     # 请确保证书已通过 Let's Encrypt 或其他 CA 生成，并放置在以下路径
@@ -64,7 +69,7 @@ if __name__ == '__main__':
     # 将 DNS a 记录指向本机公网 IP，即可通过 https://aibuild.ipatpat.com 访问
     app.run(
         host='0.0.0.0',
-        port=443,
+        port=5000,
         debug=False,
         ssl_context=(ssl_cert, ssl_key)
     )
