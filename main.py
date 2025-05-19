@@ -48,7 +48,11 @@ def convert():
         return jsonify(error=f"Conversion failed: {error_msg}"), 500
 
     # 返回下载链接
-    download_url = f"https://aibuild.ipatpat.com/pdfs/{safe_name}"
+    if request.headers.get('X-Forwarded-Proto') == 'https':
+        host = request.headers.get('X-Forwarded-Host', request.host)
+        download_url = f"https://{host}/pdfs/{safe_name}"
+    else:
+        download_url = f"{request.url_root}pdfs/{safe_name}"
     return jsonify(url=download_url, file_name=safe_name)
 
 @app.route('/pdfs/<path:filename>', methods=['GET'])
