@@ -4,7 +4,6 @@ import os
 os.environ['DYLD_LIBRARY_PATH'] = '/opt/homebrew/lib:/opt/homebrew/opt/glib/lib' + ':' + os.environ.get('DYLD_LIBRARY_PATH', '')
 from md2pdf.core import md2pdf
 import shutil
-from main import app
 
 
 app = Flask(__name__)
@@ -68,7 +67,7 @@ if __name__ == '__main__':
     ssl_key  = '/etc/letsencrypt/live/aibuild.ipatpat.com/privkey.pem'
     # 将 DNS a 记录指向本机公网 IP，即可通过 https://aibuild.ipatpat.com 访问
     app.run(
-        host='0.0.0.0',
+        host='127.0.0.1',
         port=5000,
         debug=False
     )

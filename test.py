@@ -15,7 +15,7 @@ payload = {
 
 try:
     # 发起 POST 请求
-    resp = requests.post(API_URL, json=payload, verify=True)
+    resp = requests.post(API_URL, json=payload, verify=False)
     print(resp.status_code, resp.text)   
     resp.raise_for_status()
 
@@ -37,7 +37,7 @@ print(f"转换成功，下载链接: {download_url}")
 download = True  # 如需手动检查可设为 False
 if download:
     try:
-        r = requests.get(download_url, verify=True)
+        r = requests.get(download_url, verify=False)
         r.raise_for_status()
         save_path = os.path.join(DOWNLOAD_DIR, file_name)
         with open(save_path, 'wb') as f:
