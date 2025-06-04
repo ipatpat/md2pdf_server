@@ -1,7 +1,11 @@
 from flask import Flask, request, send_from_directory, jsonify
 import tempfile
 import os
-os.environ['DYLD_LIBRARY_PATH'] = '/opt/homebrew/lib:/opt/homebrew/opt/glib/lib' + ':' + os.environ.get('DYLD_LIBRARY_PATH', '')
+# 修改为Linux适用的环境变量
+if os.name == 'posix' and not os.uname().sysname == 'Darwin':  # Linux系统
+    os.environ['LD_LIBRARY_PATH'] = '/usr/lib:/usr/local/lib' + ':' + os.environ.get('LD_LIBRARY_PATH', '')
+else:  # macOS系统
+    os.environ['DYLD_LIBRARY_PATH'] = '/opt/homebrew/lib:/opt/homebrew/opt/glib/lib' + ':' + os.environ.get('DYLD_LIBRARY_PATH', '')
 from md2pdf.core import md2pdf
 import shutil
 

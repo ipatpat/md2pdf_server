@@ -2,7 +2,7 @@ import requests
 import os
 
 # 配置 API 地址
-API_URL = 'https://aibuild.ipatpat.com/convert'
+API_URL = 'https://aibuild2.ipatpat.com/convert'
 
 # 下载目录
 DOWNLOAD_DIR = 'downloads'
@@ -10,7 +10,7 @@ os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
 # 测试用的 Markdown 内容和文件名
 payload = {
-    'markdown': '# title\n吃屎吧',
+    'markdown': '# title\n吃屎吧.',
     'file_name': 'test_output.pdf'
 }
 
