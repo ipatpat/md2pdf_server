@@ -71,8 +71,8 @@ def health_check():
 if __name__ == '__main__':
     # HTTPS 运行配置，使用证书绑定域名 aibuild.ipatpat.com
     # 请确保证书已通过 Let's Encrypt 或其他 CA 生成，并放置在以下路径
-    ssl_cert = '/etc/letsencrypt/live/aibuild.ipatpat.com/fullchain.pem'
-    ssl_key  = '/etc/letsencrypt/live/aibuild.ipatpat.com/privkey.pem'
+    ssl_cert = '/etc/letsencrypt/live/aibuild2.ipatpat.com/fullchain.pem'
+    ssl_key  = '/etc/letsencrypt/live/aibuild2.ipatpat.com/privkey.pem'
     # 将 DNS a 记录指向本机公网 IP，即可通过 https://aibuild.ipatpat.com 访问
     app.run(
         host='127.0.0.1',
